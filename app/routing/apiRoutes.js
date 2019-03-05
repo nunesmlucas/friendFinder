@@ -16,13 +16,12 @@ module.exports = function (app) {
 
     app.post("/api/friends", function (req, res) {
         friendsData.push(req.body);
-        res.json(true);
-        // res.json(true);
+
     });
 
-    app.post("/api/clear", function (req, res) {
-        // Empty out the arrays of data
-        friendsData.length = [];
-        res.json({ ok: true });
-    });
+    // app.post("/api/clear", function (req, res) {
+    //     // Empty out the arrays of data
+    //     friendsData.length = [];
+    //     res.json({ ok: true });
+    // });
 };
