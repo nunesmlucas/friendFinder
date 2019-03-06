@@ -13,7 +13,8 @@ var friendsData = [
             5,
             4,
             1
-        ]
+        ],
+        totalScore: 0
     }
 ];
 

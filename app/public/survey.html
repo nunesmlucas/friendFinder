@@ -181,8 +181,7 @@
                 </div>
                 <div class="modal-body">
                     <h2 id="match-name"></h2>
-                    <img id="match-img"
-                        src="" alt="">
+                    <img id="match-img" src="" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -256,19 +255,29 @@
                     ]
                 };
 
+                var totalScores = 0;
+
+                for (var i = 0; i < userData.scores.length; i++) {
+                    totalScores += parseInt(userData.scores[i]);
+                };
+
+                userData.totalScores = totalScores;
+
+                console.log("Total Scores " + userData.totalScores);
+
                 // console.log(userData);
+                console.log("IN THIS");
+
 
                 // AJAX post the data to the friends API.
                 $.post("/api/friends", userData, function (data) {
-
                     // Grab the result from the AJAX post so that the best match's name and photo are displayed.
                     $("#match-name").text(data.name);
                     $("#match-img").attr("src", data.photo);
-
                     // Show the modal with the best match
                     $("#results-modal").modal("toggle");
-
                 });
+                
             } else {
                 alert("Please fill out all fields before submitting!");
             }
