@@ -56,7 +56,6 @@ module.exports = function (app) {
     });
 
 
-
     // app.post("/api/clear", function (req, res) {
     //     // Empty out the arrays of data
     //     friendsData.length = [];
