@@ -17,7 +17,28 @@ module.exports = function (app) {
     app.post("/api/friends", function (req, res) {
         friendsData.push(req.body);
 
-        res.json(friendsData);
+        var user = req.body;
+        // you need a place to store the minimum difference
+        var min = 99999999999;
+        // you need a place to store the matching friend
+        var friendMatch;
+
+        // go through friend's data to find the minimum difference
+        for (var j = 0; j < friendsData.length; j++) {
+            var friend = friendsData[j];
+            // calculate the difference
+            var scoreDifference = Math.abs(user.totalScore - friend.totalScore)
+
+            // if the difference is less than minimum,
+            if (scoreDifference < min && user.name !== friend.name) {
+                // store the min and the friendMatch
+                min = scoreDifference;
+                friendMatch = friend;
+            }
+        }
+
+
+        res.json(friendMatch);
     });
 
     app.get("/api/friendmatch/:name", function (req, res) {
@@ -27,8 +48,8 @@ module.exports = function (app) {
         // find the user object
         // go through friend's data until the user object is found then user = friendData[i]
         for (var i = 0; i < friendsData.length; i++) {
-            if (friendData[i].name === user_name) {
-                user = friendData[i];
+            if (friendsData[i].name === user_name) {
+                user = friendsData[i];
             }
         }
 
@@ -39,7 +60,7 @@ module.exports = function (app) {
 
         // go through friend's data to find the minimum difference
         for (var j = 0; j < friendsData.length; j++) {
-            var friend = friendData[j];
+            var friend = friendsData[j];
             // calculate the difference
             var scoreDifference = Math.abs(user.totalScore - friend.totalScore)
 
@@ -54,6 +75,8 @@ module.exports = function (app) {
 
         res.json(friendMatch);
     });
+
+
 
 
     // app.post("/api/clear", function (req, res) {
